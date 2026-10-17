@@ -1,0 +1,9 @@
+# Changelog
+
+## 0.11.1
+
+- Rust launch/version core, asynchronous napi-rs adapter and VS Code/VSCodium client.
+- Zed Rust/WASI adapter with pinned tree-sitter grammar and query-based highlighting.
+- Alice icons, snippets, indentation and bracket configuration.
+- Shared Alice CLI language server, project/NuGet assistance and configurable checking.
+- Cross-platform VSIX/WASI builds and editor integration tests.

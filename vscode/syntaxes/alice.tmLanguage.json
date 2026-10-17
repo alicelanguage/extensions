@@ -1,0 +1,98 @@
+{
+  "name": "Alice",
+  "scopeName": "source.alice",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#heredoc"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "name": "storage.type.attribute.alice",
+      "match": "@\\[[A-Za-z_][\\w.]*"
+    },
+    {
+      "name": "entity.name.function.alice",
+      "match": "(?<=\\bdef\\s)(?:self\\.)?[a-zA-Z_]\\w*[?!]?"
+    },
+    {
+      "name": "keyword.control.alice",
+      "match": "\\b(?:def|class|module|struct|enum|interface|record|lib|fun|if|elsif|else|unless|while|until|for|in|do|end|case|when|then|begin|rescue|ensure|return|break|next|yield|self|super|nil|true|false|and|or|not|require|using|include|extend|getter|setter|property|spawn|async|await|val|var|raise|loop|lambda|proc|describe|context|it|expect|private|protected|public|abstract|forall|where|alias|retry)\\b"
+    },
+    {
+      "name": "constant.numeric.alice",
+      "match": "\\b(?:0[xX][\\da-fA-F_]+|0[bB][01_]+|\\d[\\d_]*(?:\\.\\d[\\d_]*)?(?:[eE][+-]?\\d+)?)\\b"
+    },
+    {
+      "name": "constant.other.symbol.alice",
+      "match": "(?<!\\w):[a-zA-Z_]\\w*[?!]?"
+    },
+    {
+      "name": "variable.other.instance.alice",
+      "match": "@[a-zA-Z_]\\w*"
+    },
+    {
+      "name": "entity.name.type.alice",
+      "match": "\\b[A-Z][\\w]*\\b"
+    },
+    {
+      "name": "keyword.operator.alice",
+      "match": "\\*\\*|<=>|===|==|!=|<=|>=|=>|->|&\\.|::|\\.\\.?\\.?|[+*/%=<>!&|^~?:-]"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.alice",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "heredoc": {
+      "name": "string.unquoted.heredoc.alice",
+      "begin": "<<[-~]?([A-Za-z_]\\w*)",
+      "end": "^\\s*\\1\\s*$"
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.alice",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.alice",
+              "match": "\\\\."
+            },
+            {
+              "name": "meta.interpolation.alice",
+              "begin": "#\\{",
+              "end": "\\}",
+              "patterns": [
+                {
+                  "include": "$self"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.alice",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.alice",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

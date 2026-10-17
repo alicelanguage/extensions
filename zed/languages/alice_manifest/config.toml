@@ -1,0 +1,10 @@
+name = "Alice Manifest"
+grammar = "toml"
+path_suffixes = ["alice.toml"]
+line_comments = ["# "]
+tab_size = 2
+brackets = [
+  { start = "[", end = "]", close = true, newline = false },
+  { start = "{", end = "}", close = true, newline = false },
+  { start = "\"", end = "\"", close = true, newline = false, not_in = ["string", "comment"] },
+]

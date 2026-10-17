@@ -1,0 +1,12 @@
+test/**
+**/*.d.ts
+**/*.map
+node_modules/.bin/**
+node_modules/@napi-rs/**
+node_modules/@vscode/vsce/**
+node_modules/vscode-textmate/**
+node_modules/vscode-oniguruma/**
+package-lock.json
+
+native/alice_editor_native.node
+node_modules/@emnapi/**

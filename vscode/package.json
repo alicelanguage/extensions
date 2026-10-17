@@ -1,0 +1,150 @@
+{
+  "name": "alice-language",
+  "displayName": "Alice",
+  "description": "Alice language support: .NET completion, diagnostics, auto-import, hover, formatting, and NuGet assistance.",
+  "version": "0.11.1",
+  "publisher": "alicelanguage",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alicelanguage/extensions"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters",
+    "Snippets"
+  ],
+  "keywords": [
+    "Alice",
+    "dotnet",
+    "NuGet",
+    "Ruby"
+  ],
+  "icon": "icons/alice.png",
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:alice",
+    "workspaceContains:**/alice.toml",
+    "onCommand:alice.restartServer"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false
+    },
+    "virtualWorkspaces": false
+  },
+  "scripts": {
+    "build:native": "cd ../native && napi build --release --platform --output-dir ../vscode/native --js binding.js --dts binding.d.ts",
+    "test": "node --test test/*.test.js",
+    "package": "vsce package",
+    "vscode:prepublish": "node ../scripts/check-package.cjs"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^3.10.8",
+    "@vscode/vsce": "^4.0.0",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.3.0"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "alice",
+        "aliases": [
+          "Alice",
+          "alice"
+        ],
+        "extensions": [
+          ".al"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/alice.svg",
+          "dark": "./icons/alice.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "alice",
+        "scopeName": "source.alice",
+        "path": "./syntaxes/alice.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "alice",
+        "path": "./snippets/alice.json"
+      }
+    ],
+    "configuration": {
+      "title": "Alice",
+      "properties": {
+        "alice.path": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "Alice executable path. Empty searches PATH and ~/.alice/bin. Requires Alice 0.11.1+."
+        },
+        "alice.debounceMs": {
+          "type": "integer",
+          "default": 180,
+          "minimum": 0,
+          "maximum": 2000,
+          "description": "Delay before checking edits, in milliseconds."
+        },
+        "alice.deepChecks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Check generated C# on open and save, including null safety."
+        },
+        "alice.nugetCompletion": {
+          "type": "boolean",
+          "default": true,
+          "description": "Fetch package IDs and versions from nuget.org while completing dependencies."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "alice.restartServer",
+        "title": "Alice: Restart Language Server"
+      },
+      {
+        "command": "alice.showOutput",
+        "title": "Alice: Show Language Server Output"
+      },
+      {
+        "command": "alice.runFile",
+        "title": "Alice: Run Current File"
+      },
+      {
+        "command": "alice.build",
+        "title": "Alice: Build Project"
+      },
+      {
+        "command": "alice.restore",
+        "title": "Alice: Restore Dependencies"
+      },
+      {
+        "command": "alice.test",
+        "title": "Alice: Run Tests"
+      },
+      {
+        "command": "alice.repl",
+        "title": "Alice: Open REPL"
+      }
+    ],
+    "configurationDefaults": {
+      "[alice]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://zed.dev/schema/icon_themes/v0.3.0.json",
+  "name": "Alice",
+  "author": "Alice Language",
+  "themes": [
+    {
+      "name": "Alice",
+      "appearance": "dark",
+      "file_suffixes": {
+        "al": "alice",
+        "alproj": "alice"
+      },
+      "file_stems": {
+        "alice.toml": "alice"
+      },
+      "file_icons": {
+        "alice": {
+          "path": "./icons/alice.svg"
+        }
+      }
+    }
+  ]
+}

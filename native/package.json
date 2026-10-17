@@ -1,0 +1,6 @@
+{
+  "name": "alice-editor-native",
+  "version": "0.11.1",
+  "private": true,
+  "napi": { "binaryName": "alice_editor_native" }
+}

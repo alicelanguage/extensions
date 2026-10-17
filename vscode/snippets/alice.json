@@ -1,0 +1,70 @@
+{
+  "Method": {
+    "prefix": "def",
+    "body": [
+      "def ${1:name}(${2:args})${3: : Int32}",
+      "  $0",
+      "end"
+    ],
+    "description": "Define a method"
+  },
+  "Class": {
+    "prefix": "class",
+    "body": [
+      "class ${1:Name}",
+      "  $0",
+      "end"
+    ],
+    "description": "Define a class"
+  },
+  "Module": {
+    "prefix": "module",
+    "body": [
+      "module ${1:Name}",
+      "  $0",
+      "end"
+    ]
+  },
+  "For loop": {
+    "prefix": "for",
+    "body": [
+      "for ${1:item} in ${2:items}",
+      "  $0",
+      "end"
+    ]
+  },
+  "Conditional": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition}",
+      "  $0",
+      "end"
+    ]
+  },
+  "Spec": {
+    "prefix": "describe",
+    "body": [
+      "describe \"${1:feature}\" do",
+      "  it \"${2:works}\" do",
+      "    $0",
+      "  end",
+      "end"
+    ]
+  },
+  "Using namespace": {
+    "prefix": "using",
+    "body": "using ${1:System.Diagnostics}"
+  },
+  "Immutable binding": {
+    "prefix": "val",
+    "body": "val ${1:name} = $0"
+  },
+  "Concurrent block": {
+    "prefix": "spawn",
+    "body": [
+      "spawn do",
+      "  $0",
+      "end"
+    ]
+  }
+}

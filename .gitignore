@@ -1,0 +1,8 @@
+/target/
+node_modules/
+*.node
+*.vsix
+*.wasm
+/zed/grammars/
+/vscode/native/*.js
+/vscode/native/*.ts

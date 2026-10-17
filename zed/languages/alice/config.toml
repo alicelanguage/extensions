@@ -1,0 +1,14 @@
+name = "Alice"
+grammar = "ruby"
+path_suffixes = ["al"]
+line_comments = ["# "]
+tab_size = 2
+word_characters = ["?", "!", "@"]
+increase_indent_pattern = '^\s*(def|class|struct|module|interface|enum|lib|namespace|if|unless|while|until|for|case|begin)\b|\bdo\s*(\|[^|]*\|)?\s*$'
+decrease_indent_pattern = '^\s*(end|else|elsif|when|rescue|ensure)\b'
+brackets = [
+  { start = "(", end = ")", close = true, newline = false },
+  { start = "[", end = "]", close = true, newline = false },
+  { start = "{", end = "}", close = true, newline = true },
+  { start = "\"", end = "\"", close = true, newline = false, not_in = ["string", "comment"] },
+]
