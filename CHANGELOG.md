@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.11.3
+
+- Include the Apache-2.0 license in the Zed extension package.
+
+
 ## 0.11.2
 
 - Merge keyword snippets into the language-server suggestions so `class`, `def` and other keywords appear once in completion.

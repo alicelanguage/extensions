@@ -1,6 +1,6 @@
 id = "alice"
 name = "Alice"
-version = "0.11.2"
+version = "0.11.3"
 schema_version = 1
 authors = ["Alice Language"]
 description = "Alice language support: highlighting, completion, diagnostics, .NET interop and NuGet assistance."
