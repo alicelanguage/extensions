@@ -65,18 +65,21 @@ for `alice.toml` and `.alproj` without requiring other extensions.
 
 ## Build and verify
 
+Requires Node.js 22+, Rust and Python 3. Install the WASI target once for Zed.
+Run these commands from the repository root:
+
 ```sh
-cargo test -p alice-editor-core
-cargo clippy --workspace -- -D warnings
-cd vscode
-npm ci
-npm run build:native
-npm test
-npm run package -- --target linux-x64
-cd ..
+npm install
 rustup target add wasm32-wasip2
-cargo build -p alice-zed --release --target wasm32-wasip2
+npm run package:vsix  # Build native addon and package for this OS/architecture
+npm run package:zed   # Build WASI component and package the Zed archive
+npm run package       # Generate both in dist/
+npm test
+npm run check
 ```
+
+`npm ci` also installs the locked VS Code dependencies. `npm run build` builds both
+adapters without packaging. Tests require a native build (`npm run build:native`).
 
 Build the native addon on each matching host; package targets are linux-x64,
 linux-arm64, darwin-x64, darwin-arm64, win32-x64 and win32-arm64. CI creates the

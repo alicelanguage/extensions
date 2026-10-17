@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Root npm commands install dependencies, build, check, test and package host VSIX/Zed artifacts into `dist/`.
+
 ## 0.11.1
 
 - Rust launch/version core, asynchronous napi-rs adapter and VS Code/VSCodium client.

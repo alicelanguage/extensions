@@ -1,0 +1,18 @@
+{
+  "name": "alice-editor-extensions",
+  "version": "0.11.1",
+  "private": true,
+  "description": "Build and package the Alice editor extensions",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "postinstall": "npm --prefix vscode ci",
+    "build": "npm run build:native && npm run build:zed",
+    "build:native": "npm --prefix vscode run build:native",
+    "build:zed": "cargo build --locked -p alice-zed --release --target wasm32-wasip2",
+    "test": "cargo test --locked -p alice-editor-core && npm --prefix vscode test",
+    "check": "cargo fmt --all -- --check && cargo clippy --workspace --locked -- -D warnings",
+    "package:vsix": "npm run build:native && node scripts/package.cjs vsix",
+    "package:zed": "npm run build:zed && node scripts/package.cjs zed",
+    "package": "npm run package:vsix && npm run package:zed"
+  }
+}

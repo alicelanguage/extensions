@@ -29,7 +29,9 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-          cache-dependency-path: vscode/package-lock.json
+          cache-dependency-path: |
+            package-lock.json
+            vscode/package-lock.json
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: clippy, rustfmt
@@ -37,17 +39,13 @@ jobs:
       - run: cargo test -p alice-editor-core --locked
       - run: cargo clippy --workspace --locked -- -D warnings
       - run: npm ci
-        working-directory: vscode
       - run: npm run build:native
-        working-directory: vscode
       - run: npm test
-        working-directory: vscode
-      - run: npm run package -- --target ${{ matrix.target }} --out alice-language-0.11.1-${{ matrix.target }}.vsix
-        working-directory: vscode
+      - run: npm run package:vsix
       - uses: actions/upload-artifact@v4
         with:
           name: alice-${{ matrix.target }}
-          path: vscode/*.vsix
+          path: dist/*-${{ matrix.target }}.vsix
   zed:
     runs-on: ubuntu-24.04
     steps:
