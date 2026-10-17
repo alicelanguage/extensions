@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Correct the Marketplace publisher to `JuliaKlee`.
+
 ## 0.11.1
 
 - Rust launch/version core, asynchronous napi-rs adapter and VS Code/VSCodium client.

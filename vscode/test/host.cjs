@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 
 exports.run = async function () {
-  const extension = vscode.extensions.getExtension('alicelanguage.alice-language');
+  const extension = vscode.extensions.getExtension('JuliaKlee.alice-language');
   assert.ok(extension, 'Alice extension is installed');
   await extension.activate();
   const doc = await vscode.workspace.openTextDocument(vscode.Uri.joinPath(vscode.workspace.workspaceFolders[0].uri, 'main.al'));

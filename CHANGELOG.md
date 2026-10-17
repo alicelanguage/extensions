@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Use the `JuliaKlee` Marketplace publisher ID and retain the Alice brand icon in the VSIX.
 - Root npm commands install dependencies, build, check, test and package host VSIX/Zed artifacts into `dist/`.
 
 ## 0.11.1
