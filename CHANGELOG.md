@@ -3,6 +3,7 @@
 ## 0.11.3
 
 - Include the Apache-2.0 license in the Zed extension package.
+- Keep Zed language support separate from the icon theme, which Zed packages as its own extension type.
 
 
 ## 0.11.2
