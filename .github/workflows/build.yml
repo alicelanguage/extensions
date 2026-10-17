@@ -7,6 +7,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: editor-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   vscode:
     strategy:
@@ -51,8 +54,8 @@ jobs:
       - uses: actions/checkout@v5
       - uses: dtolnay/rust-toolchain@stable
         with:
-          targets: wasm32-wasip1
-      - run: cargo build --locked -p alice-zed --release --target wasm32-wasip1
+          targets: wasm32-wasip2
+      - run: cargo build --locked -p alice-zed --release --target wasm32-wasip2
       - run: python scripts/package-zed.py
       - uses: actions/setup-python@v5
         with:

@@ -74,8 +74,8 @@ npm run build:native
 npm test
 npm run package -- --target linux-x64
 cd ..
-rustup target add wasm32-wasip1
-cargo build -p alice-zed --release --target wasm32-wasip1
+rustup target add wasm32-wasip2
+cargo build -p alice-zed --release --target wasm32-wasip2
 ```
 
 Build the native addon on each matching host; package targets are linux-x64,
