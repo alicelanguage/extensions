@@ -38,7 +38,7 @@ impl zed::Extension for Alice {
                 .unwrap_or_else(|| SERVER_ARGS.iter().map(|s| s.to_string()).collect()),
             env: vec![
                 ("ALICE_NO_UPDATE_CHECK".into(), "1".into()),
-                ("DOTNET_GCServer".into(), "0".into()),
+                ("DOTNET_gcServer".into(), "0".into()),
             ],
         })
     }

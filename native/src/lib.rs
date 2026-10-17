@@ -63,7 +63,7 @@ fn probe(path: &PathBuf) -> std::result::Result<String, String> {
     cmd.arg("--version")
         .env("ALICE_NO_UPDATE_CHECK", "1")
         .env("NO_COLOR", "1")
-        .env("DOTNET_GCServer", "0")
+        .env("DOTNET_gcServer", "0")
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
         .stderr(Stdio::null());

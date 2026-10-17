@@ -14,7 +14,7 @@ async function start(context) {
   if (client) await client.stop();
   watcher?.dispose();
   server = await locateServer(vscode.workspace.getConfiguration('alice').get('path') || undefined);
-  const launch = { command: server.command, args: server.args, options: { env: { ...process.env, ALICE_NO_UPDATE_CHECK: '1', DOTNET_GCServer: '0' } } };
+  const launch = { command: server.command, args: server.args, options: { env: { ...process.env, ALICE_NO_UPDATE_CHECK: '1', DOTNET_gcServer: '0' } } };
   watcher = vscode.workspace.createFileSystemWatcher('**/{alice.toml,alice.lock,*.alproj,refs.txt}');
   client = new LanguageClient('alice', 'Alice', launch, {
     documentSelector: [{ scheme: 'file', language: 'alice' }, { scheme: 'file', pattern: '**/alice.toml' }, { scheme: 'file', pattern: '**/*.alproj' }],

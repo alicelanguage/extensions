@@ -32,3 +32,16 @@ test('Rust addon discovers and validates a real CLI without blocking JS', async 
   assert.match(command.version, /^0\.(?:1[1-9]|[2-9]\d)\./);
   await assert.rejects(locateServer('/definitely/missing/alice'), /not found/);
 });
+
+
+test('Native version probe requests workstation GC on case-sensitive platforms', async (t) => {
+  if (process.platform === 'win32') return t.skip('Windows environment names are case-insensitive');
+  const os = require('node:os');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'alice-native-gc-'));
+  try {
+    const executable = path.join(dir, 'alice');
+    fs.writeFileSync(executable, '#!/bin/sh\nif [ "$DOTNET_gcServer" = "0" ]; then echo "Alice 0.11.1"; else echo "Alice 0.10.0"; fi\n', { mode: 0o755 });
+    const { locateServer } = require('../native/binding.js');
+    assert.equal((await locateServer(executable)).version, '0.11.1');
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});

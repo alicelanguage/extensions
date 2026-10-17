@@ -26,7 +26,9 @@ pub fn validate_version(output: &str) -> Result<String, String> {
         .ok_or(
             "Cannot read Alice version; install Alice 0.11.1 or newer from https://alice-lang.org",
         )?;
-    if version.0 < MIN_VERSION {
+    if version.0 < MIN_VERSION
+        || (version.0 == MIN_VERSION && version.1.split('+').next().unwrap_or("").contains('-'))
+    {
         return Err(format!(
             "Alice {} is too old; run `alice self update` (0.11.1 or newer required)",
             version.1
@@ -69,6 +71,7 @@ mod tests {
         );
         assert!(validate_version("Alice 0.12.0-nightly.20261016").is_ok());
         assert!(validate_version("Alice 0.11.0").is_err());
+        assert!(validate_version("Alice 0.11.1-nightly.20261016").is_err());
         assert!(validate_version("missing").is_err());
     }
     #[test]
