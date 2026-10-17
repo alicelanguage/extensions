@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.11.2
 
+- Remove duplicate keyword/snippet suggestions while keeping snippet expansion on the single keyword entry.
 - Correct the Marketplace publisher to `JuliaKlee`.
 
 ## 0.11.1

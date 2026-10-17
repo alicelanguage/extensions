@@ -14,9 +14,9 @@ contains the language server (`alice lsp --stdio`).
 Install the VSIX matching your OS and architecture from this repository's releases:
 
 ```sh
-code --install-extension alice-language-0.11.1-linux-x64.vsix
+code --install-extension alice-language-0.11.2-linux-x64.vsix
 # VSCodium uses the same package:
-codium --install-extension alice-language-0.11.1-linux-x64.vsix
+codium --install-extension alice-language-0.11.2-linux-x64.vsix
 ```
 
 Set `alice.path` to an absolute executable path if Alice is not found automatically

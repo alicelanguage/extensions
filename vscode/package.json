@@ -2,7 +2,7 @@
   "name": "alice-language",
   "displayName": "Alice",
   "description": "Alice language support: .NET completion, diagnostics, auto-import, hover, formatting, and NuGet assistance.",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "publisher": "JuliaKlee",
   "license": "Apache-2.0",
   "repository": {
@@ -74,12 +74,6 @@
         "language": "alice",
         "scopeName": "source.alice",
         "path": "./syntaxes/alice.tmLanguage.json"
-      }
-    ],
-    "snippets": [
-      {
-        "language": "alice",
-        "path": "./snippets/alice.json"
       }
     ],
     "configuration": {

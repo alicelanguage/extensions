@@ -2,6 +2,7 @@
 from pathlib import Path
 import sys
 import tarfile
+import tomllib
 
 root = Path(__file__).resolve().parents[1]
 wasm = root / "target/wasm32-wasip2/release/alice_zed.wasm"
@@ -9,7 +10,8 @@ if not wasm.is_file():
     raise SystemExit("Build first: cargo build -p alice-zed --release --target wasm32-wasip2")
 if wasm.read_bytes()[:8] != b"\0asm\x0d\0\x01\0":
     raise SystemExit("Zed requires a WASI Preview 2 component; rebuild with wasm32-wasip2")
-output = Path(sys.argv[1] if len(sys.argv) > 1 else "alice-zed-0.11.1.tar.gz").resolve()
+version = tomllib.loads((root / "zed/extension.toml").read_text())["version"]
+output = Path(sys.argv[1] if len(sys.argv) > 1 else f"alice-zed-{version}.tar.gz").resolve()
 output.parent.mkdir(parents=True, exist_ok=True)
 with tarfile.open(output, "w:gz") as archive:
     for name in ["Cargo.toml", "Cargo.lock", "LICENSE", "README.md"]:

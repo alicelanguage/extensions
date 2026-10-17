@@ -14,9 +14,9 @@ contains the language server (`alice lsp --stdio`).
 Install the VSIX matching your OS and architecture from this repository's releases:
 
 ```sh
-code --install-extension alice-language-0.11.1-linux-x64.vsix
+code --install-extension alice-language-0.11.2-linux-x64.vsix
 # VSCodium uses the same package:
-codium --install-extension alice-language-0.11.1-linux-x64.vsix
+codium --install-extension alice-language-0.11.2-linux-x64.vsix
 ```
 
 Set `alice.path` to an absolute executable path if Alice is not found automatically
@@ -65,7 +65,7 @@ for `alice.toml` and `.alproj` without requiring other extensions.
 
 ## Build and verify
 
-Requires Node.js 22+, Rust and Python 3. Install the WASI target once for Zed.
+Requires Node.js 22+, Rust and Python 3.11+. Install the WASI target once for Zed.
 Run these commands from the repository root:
 
 ```sh

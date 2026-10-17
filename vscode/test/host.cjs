@@ -36,6 +36,18 @@ exports.run = async function () {
   for (const symbol of [type, ...type.children]) {
     assert.ok(symbol.range.contains(symbol.selectionRange), `${symbol.name}: selection range is contained`);
   }
+  const keywordEdit = new vscode.WorkspaceEdit();
+  keywordEdit.replace(doc.uri, new vscode.Range(0, 0, doc.lineCount, 0), 'class\n');
+  await vscode.workspace.applyEdit(keywordEdit);
+  const keywordCompletions = await until(async () => {
+    const result = await vscode.commands.executeCommand('vscode.executeCompletionItemProvider', doc.uri, new vscode.Position(0, 5));
+    return result?.items.some(i => i.label === 'class') && result;
+  });
+  const classes = keywordCompletions.items.filter(i => i.label === 'class');
+  assert.equal(classes.length, 1, 'class has one completion entry');
+  assert.equal(classes[0].kind, vscode.CompletionItemKind.Keyword);
+  assert.ok(classes[0].insertText instanceof vscode.SnippetString, 'the single keyword retains snippet expansion');
+  assert.ok(classes[0].insertText.value.startsWith('class ${1:Name}'));
   const invalid = new vscode.WorkspaceEdit();
   invalid.replace(doc.uri, new vscode.Range(0, 0, doc.lineCount, 0), 'val x = 1\nx = 2\n');
   await vscode.workspace.applyEdit(invalid);
@@ -44,5 +56,5 @@ exports.run = async function () {
   fixed.replace(doc.uri, new vscode.Range(0, 0, 0, 3), 'var');
   await vscode.workspace.applyEdit(fixed);
   await until(() => !vscode.languages.getDiagnostics(doc.uri).some(d => String(d.code) === 'AL0203'));
-  fs.writeFileSync(process.env.ALICE_EDITOR_TEST_RESULT, JSON.stringify({ editor: vscode.version, completion: 'Sqrt', hover: true, definition: true, documentSymbols: true, incrementalDiagnostics: true }));
+  fs.writeFileSync(process.env.ALICE_EDITOR_TEST_RESULT, JSON.stringify({ editor: vscode.version, completion: 'Sqrt', hover: true, definition: true, documentSymbols: true, keywordCompletion: 'single entry with snippet', incrementalDiagnostics: true }));
 };

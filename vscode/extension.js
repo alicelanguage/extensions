@@ -2,6 +2,7 @@
 const vscode = require('vscode');
 const { LanguageClient } = require('vscode-languageclient/node');
 const { locateServer } = require('./native/binding.js');
+const keywordSnippets = new Map(Object.values(require('./snippets/alice.json')).map(snippet => [snippet.prefix, snippet]));
 let client, output, server, watcher;
 let restarting = Promise.resolve();
 
@@ -20,7 +21,22 @@ async function start(context) {
     documentSelector: [{ scheme: 'file', language: 'alice' }, { scheme: 'file', pattern: '**/alice.toml' }, { scheme: 'file', pattern: '**/*.alproj' }],
     outputChannel: output,
     initializationOptions: options(),
-    synchronize: { fileEvents: watcher }
+    synchronize: { fileEvents: watcher },
+    middleware: {
+      async provideCompletionItem(document, position, context, token, next) {
+        const result = await next(document, position, context, token);
+        if (!result) return result;
+        for (const item of Array.isArray(result) ? result : result.items) {
+          if (item.kind !== vscode.CompletionItemKind.Keyword) continue;
+          const label = typeof item.label === 'string' ? item.label : item.label.label;
+          const snippet = keywordSnippets.get(label);
+          if (!snippet) continue;
+          item.insertText = new vscode.SnippetString(Array.isArray(snippet.body) ? snippet.body.join('\n') : snippet.body);
+          if (!item.documentation && snippet.description) item.documentation = snippet.description;
+        }
+        return result;
+      }
+    }
   });
   output.appendLine(`Alice ${server.version}: ${server.command}`);
   await client.start();
