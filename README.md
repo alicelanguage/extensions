@@ -32,8 +32,7 @@ Settings: `alice.debounceMs` (180), `alice.deepChecks` (true),
 NuGet requests happen only when you request completion in a dependency entry;
 there is no automatic restore, build or software download. Run **Restore Dependencies**
 after editing dependencies to refresh API metadata. Build C# path dependencies to
-update their exported APIs, then use **Restart Language Server** to reload changed
-reference assemblies. Place their XML docs beside the DLL for hover help.
+update their exported APIs; the server reloads changed metadata without locking DLLs. Place their XML docs beside the DLL for hover help.
 
 Untrusted/virtual workspaces do not launch the CLI. Project commands use process
 arguments, without interpolating filenames into shell commands.
