@@ -23,6 +23,19 @@ exports.run = async function () {
   assert.ok(hovers.length, 'Alice hover is available');
   const definitions = await vscode.commands.executeCommand('vscode.executeDefinitionProvider', doc.uri, new vscode.Position(1, 7));
   assert.equal(definitions[0].range.start.line, 0);
+  const mixin = new vscode.WorkspaceEdit();
+  mixin.replace(doc.uri, new vscode.Range(0, 0, doc.lineCount, 0),
+    'class A\n  include Comparable\n  def <=>(other : A) : Int32 = 0\nend\n');
+  await vscode.workspace.applyEdit(mixin);
+  const symbols = await until(async () => {
+    const result = await vscode.commands.executeCommand('vscode.executeDocumentSymbolProvider', doc.uri);
+    return result?.some(s => s.name === 'A') && result;
+  });
+  const type = symbols.find(s => s.name === 'A');
+  assert.deepEqual(type.children.map(s => s.name), ['<=>']);
+  for (const symbol of [type, ...type.children]) {
+    assert.ok(symbol.range.contains(symbol.selectionRange), `${symbol.name}: selection range is contained`);
+  }
   const invalid = new vscode.WorkspaceEdit();
   invalid.replace(doc.uri, new vscode.Range(0, 0, doc.lineCount, 0), 'val x = 1\nx = 2\n');
   await vscode.workspace.applyEdit(invalid);
@@ -31,5 +44,5 @@ exports.run = async function () {
   fixed.replace(doc.uri, new vscode.Range(0, 0, 0, 3), 'var');
   await vscode.workspace.applyEdit(fixed);
   await until(() => !vscode.languages.getDiagnostics(doc.uri).some(d => String(d.code) === 'AL0203'));
-  fs.writeFileSync(process.env.ALICE_EDITOR_TEST_RESULT, JSON.stringify({ editor: vscode.version, completion: 'Sqrt', hover: true, definition: true, incrementalDiagnostics: true }));
+  fs.writeFileSync(process.env.ALICE_EDITOR_TEST_RESULT, JSON.stringify({ editor: vscode.version, completion: 'Sqrt', hover: true, definition: true, documentSymbols: true, incrementalDiagnostics: true }));
 };
