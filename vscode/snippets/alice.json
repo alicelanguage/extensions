@@ -59,6 +59,26 @@
     "prefix": "val",
     "body": "val ${1:name} = $0"
   },
+  "Owned buffer": {
+    "prefix": "own",
+    "body": "own ${1:buffer} = Array(${2:Float64}).new(${3:n})"
+  },
+  "Parallel loop": {
+    "prefix": "par",
+    "body": [
+      "par for ${1:i} in ${2:0}...${3:n}",
+      "  $0",
+      "end"
+    ]
+  },
+  "Wrapping arithmetic": {
+    "prefix": "unchecked",
+    "body": [
+      "unchecked",
+      "  $0",
+      "end"
+    ]
+  },
   "Concurrent block": {
     "prefix": "spawn",
     "body": [

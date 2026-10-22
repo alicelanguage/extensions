@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Alice 0.12 syntax: highlight `own`, `unchecked` and `par for` (VS Code grammar, Zed highlights), indent `unchecked ... end` and `par for` blocks, and add `own`, `par` and `unchecked` snippets.
+
 ## 0.11.3
 
 - Include the Apache-2.0 license in the Zed extension package.
