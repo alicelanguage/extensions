@@ -21,7 +21,7 @@
     },
     {
       "name": "keyword.control.alice",
-      "match": "\\b(?:def|class|module|struct|enum|interface|record|lib|fun|if|elsif|else|unless|while|until|for|in|do|end|case|when|then|begin|rescue|ensure|return|break|next|yield|self|super|nil|true|false|and|or|not|require|using|include|extend|getter|setter|property|spawn|async|await|val|var|raise|loop|lambda|proc|describe|context|it|expect|private|protected|public|abstract|forall|where|alias|retry)\\b"
+      "match": "\\b(?:def|class|module|struct|enum|interface|record|lib|fun|if|elsif|else|unless|while|until|for|in|do|end|case|when|then|begin|rescue|ensure|return|break|next|yield|self|super|nil|true|false|and|or|not|require|using|include|extend|getter|setter|property|spawn|async|await|val|var|own|unchecked|par(?=\\s+for\\b)|raise|loop|lambda|proc|describe|context|it|expect|private|protected|public|abstract|forall|where|alias|retry)\\b"
     },
     {
       "name": "constant.numeric.alice",

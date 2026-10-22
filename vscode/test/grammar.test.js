@@ -20,6 +20,11 @@ test('Alice grammar highlights declarations, val, attributes, .NET types and int
   has('Stopwatch.new', 'entity.name.type.alice');
   has('puts "hello #{name}"', 'meta.interpolation.alice');
   has('# comment', 'comment.line.number-sign.alice');
+  has('own row = Array(Int32).new(n)', 'keyword.control.alice');
+  has('par for y in 0...h', 'keyword.control.alice');
+  has('unchecked', 'keyword.control.alice');
+  const lacks = (text, word) => assert.ok(!grammar.tokenizeLine(text).tokens.some(t => text.slice(t.startIndex, t.endIndex) === word && t.scopes.includes('keyword.control.alice')), `${text}: ${word} is not a keyword`);
+  lacks('par = 3', 'par');   // only `par for` is the keyword
   registry.dispose();
 });
 
